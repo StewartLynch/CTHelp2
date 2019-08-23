@@ -7,16 +7,19 @@
 //
 import UIKit
 
-@available(iOS 13.0, *)
+@available(iOS 12.0, *)
 class CTHelpCVCell: UICollectionViewCell {
     
     var bgView = UIView()
-    
     var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Title"
         label.font = UIFont.systemFont(ofSize: 25)
-        label.textColor = .label
+        if #available(iOS 13.0, *) {
+            label.textColor = .label
+        } else {
+            label.textColor = .black
+        }
         label.minimumScaleFactor = 0.5
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -32,18 +35,25 @@ class CTHelpCVCell: UICollectionViewCell {
     var helpTextView: UITextView = {
         let textView = UITextView()
         textView.font = UIFont.preferredFont(forTextStyle: .body)
-        textView.textColor = .label
+        if #available(iOS 13.0, *) {
+            textView.textColor = .label
+        } else {
+            textView.textColor = .black
+        }
         textView.isEditable = false
         return textView
     }()
-
+    
     var heightConstraint: NSLayoutConstraint!
     var actionButtonTopConstraint: NSLayoutConstraint!
     var cButton:UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        if #available(iOS 13.0, *) {
+            button.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        }
         return button
     }()
+    var closeButton = CTPaddedButton.newButton()
     var actionBtn = UIButton(frame: .zero)
     
     weak var delegate: CTHelpViewController!
@@ -54,7 +64,7 @@ class CTHelpCVCell: UICollectionViewCell {
     var data:Data?
     var contactButtonTitle:String?
     var webButtonTitle:String?
-
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -65,12 +75,16 @@ class CTHelpCVCell: UICollectionViewCell {
         setup()
     }
     
-    @available(iOS 13.0, *)
+    @available(iOS 12.0, *)
     func setup() {
         backgroundColor = .clear
         addSubview(bgView)
         bgView.translatesAutoresizingMaskIntoConstraints = false
-        bgView.backgroundColor = .systemBackground
+        if #available(iOS 13.0, *) {
+            bgView.backgroundColor = .systemBackground
+        } else {
+            bgView.backgroundColor = .white
+        }
         bgView.layer.cornerRadius = 14
         bgView.layer.shadowOpacity = 0.25
         bgView.layer.shadowOffset = .init(width: 5, height: 5)
@@ -79,21 +93,39 @@ class CTHelpCVCell: UICollectionViewCell {
         bgView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         bgView.heightAnchor.constraint(equalToConstant: 315 ).isActive = true
         bgView.widthAnchor.constraint(equalToConstant: 281).isActive = true
-        addSubview(cButton)
-        cButton.translatesAutoresizingMaskIntoConstraints = false
-        cButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        cButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        cButton.tintColor = UIColor.systemGray
-        cButton.topAnchor.constraint(equalTo: bgView.topAnchor).isActive = true
-        cButton.trailingAnchor.constraint(equalTo: bgView.trailingAnchor).isActive = true
-        cButton.addTarget(self, action: #selector(closeHelp), for: .touchUpInside)
-
+        if #available(iOS 13.0, *) {
+            addSubview(cButton)
+            cButton.translatesAutoresizingMaskIntoConstraints = false
+            cButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+            cButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            cButton.tintColor = UIColor.systemGray
+            cButton.topAnchor.constraint(equalTo: bgView.topAnchor).isActive = true
+            cButton.trailingAnchor.constraint(equalTo: bgView.trailingAnchor).isActive = true
+            cButton.addTarget(self, action: #selector(closeHelp), for: .touchUpInside)
+        } else {
+            addSubview(closeButton)
+            closeButton.padding = 28
+            closeButton.translatesAutoresizingMaskIntoConstraints = false
+            closeButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+            closeButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            closeButton.backgroundColor = UIColor.systemGray
+            closeButton.setTitle("✚", for: .normal)
+            closeButton.setTitleColor(.white, for: .normal)
+            closeButton.layer.cornerRadius = 10
+            closeButton.transform = CGAffineTransform(rotationAngle: .pi / 4)
+            closeButton.topAnchor.constraint(equalTo: bgView.topAnchor, constant: 10).isActive = true
+            closeButton.trailingAnchor.constraint(equalTo: bgView.trailingAnchor,constant: -10).isActive = true
+            closeButton.addTarget(self, action: #selector(closeHelp), for: .touchUpInside)
+        }
         addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.leadingAnchor.constraint(equalTo: bgView.leadingAnchor, constant: 10).isActive = true
         titleLabel.topAnchor.constraint(equalTo: bgView.topAnchor, constant: 8).isActive = true
-//        titleLabel.trailingAnchor.constraint(equalTo: closeButton.leadingAnchor, constant: -5).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: cButton.leadingAnchor, constant: -5).isActive = true
+        if #available(iOS 13.0, *) {
+            titleLabel.trailingAnchor.constraint(equalTo: cButton.leadingAnchor, constant: -5).isActive = true
+        } else {
+            titleLabel.trailingAnchor.constraint(equalTo: closeButton.leadingAnchor, constant: -5).isActive = true
+        }
         addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
@@ -161,7 +193,11 @@ class CTHelpCVCell: UICollectionViewCell {
         }
         
         if let color = closeButtonBGColor {
-            cButton.tintColor = color
+            if #available(iOS 13.0, *) {
+              cButton.tintColor = color
+            } else {
+                closeButton.backgroundColor = color
+            }
         }
         
         titleLabel.text = ctHelpItem.title

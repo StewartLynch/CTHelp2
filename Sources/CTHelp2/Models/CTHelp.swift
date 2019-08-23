@@ -8,7 +8,7 @@
 
 import UIKit
 
-@available(iOS 13.0, *)
+@available(iOS 12.0, *)
 public class CTHelp {
     
     public var helpItems:[CTHelpItem] = []

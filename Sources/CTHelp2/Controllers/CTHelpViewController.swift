@@ -10,7 +10,7 @@ import MessageUI
 import UIKit
 import WebKit
 
-@available(iOS 13.0, *)
+@available(iOS 12.0, *)
 public class CTHelpViewController: UIViewController, UICollectionViewDataSource,MFMailComposeViewControllerDelegate, UICollectionViewDelegate {
     
     // Colours
@@ -26,7 +26,11 @@ public class CTHelpViewController: UIViewController, UICollectionViewDataSource,
     var pageControl:UILabel = {
         let pageControl = UILabel()
         pageControl.text = ""
-        pageControl.textColor = UIColor.secondaryLabel
+        if #available(iOS 13.0, *) {
+            pageControl.textColor = UIColor.secondaryLabel
+        } else {
+            pageControl.textColor = UIColor.darkGray
+        }
         pageControl.font = UIFont.systemFont(ofSize: 17)
         return pageControl
     }()

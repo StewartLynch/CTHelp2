@@ -9,7 +9,7 @@
 import UIKit
 import MessageUI
 
-@available(iOS 13.0, *)
+@available(iOS 12.0, *)
 class CTEmailFunctions: NSObject {
     
     static func emailDeveloper(withAddress address: String, withData data:Data?, withStrings ctString: CTString?, mailTintColor:UIColor?, from vc:UIViewController) {

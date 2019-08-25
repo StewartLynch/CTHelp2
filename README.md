@@ -1,6 +1,6 @@
 # CTHelp2
 
-[![Platform](http://img.shields.io/badge/platform-iOS-blue.svg?style=flat)](https://developer.apple.com/iphone/index.action)[![](http://img.shields.io/badge/language-Swift-brightgreen.svg?color=orange)](https://developer.apple.com/swift)![](https://img.shields.io/github/tag/stewartlynch/CTPicker?style=flat))![](https://img.shields.io/github/last-commit/StewartLynch/CTPicker)
+[![Platform](http://img.shields.io/badge/platform-iOS-blue.svg?style=flat)](https://developer.apple.com/iphone/index.action)[![](http://img.shields.io/badge/language-Swift-brightgreen.svg?color=orange)](https://developer.apple.com/swift)![](https://img.shields.io/github/tag/stewartlynch/CTPicker?style=flat)![](https://img.shields.io/github/last-commit/StewartLynch/CTPicker)
 
 ### What is this?
 
@@ -18,7 +18,7 @@ Watch this video to see installation and use as described below.
 
 The video also provides tips and ideas on how to consolidate all of your help for all of your viewControllers
 
-TODO: - Create Video
+https://youtu.be/jbmQyQ3ggAQ
 
 ### Installation
 
@@ -76,6 +76,10 @@ ctHelp.new(CTHelpItem(title:"Removing a Book",
                       imageName:"RemoveBook"))
 ```
 
+**Note:** Images will be aspect scaled, but will always fit within the size of the card so it is best to design your images so that they are a maximum width of 260 px and a maximum height of 210 px.
+
+The `helpText` field will scroll, but the maximum height for your image should only be used if you have not helpText otherwise the helpText may not be visible.
+
 ##### Step 4 - Optional Cards appendDefaults()
 
 There are 2 optional cards that may be included by calling the `appendDefaults` function to your instance of `CTHelp`.  This function takes 5 parameters; `companyName` (String), `emailAddress` (String), `data` (data), `website` (String) and `companyImageName` (String)
@@ -124,8 +128,8 @@ All of the strings used in CTHelp are fully customizable and each one is optiona
 
 ```swift
 let ctString = CTString(contactTitle: "Contact Developer",
-                                  contactButtonTitle: "Contact Developer",
-                                   webButtonTitle: "Visit Web Site",
+                        contactButtonTitle: "Contact Developer",
+                        webButtonTitle: "Visit Web Site",
                         dataAlertTitle: "Attach application data",
                         dataAlertMessage: "Would you like to attach your application data to this message to assist the developer in troubleshooting?",
                         dataAlertActionNo: "No",
@@ -155,22 +159,22 @@ To customize the colors, just create a new instance of  a `CTColors` and complet
 let ctColors = CTColors()        
 if #available(iOS 13.0, *) {
             ctColors = CTColors(mailtintColor: .default,
-                                    bgViewColor: UIColor.systemBackground,
-                                    helpTextColor: UIColor.systemGray,
-                                    titleColor: UIColor.label,
-                                    actionButtonBGColor: UIColor.systemBlue,
-                                    actionButtonTextColor: UIColor.white,
-                                    closeButtonBGColor: UIColor.systemGray,
-                                    pageControlColor: UIColor.secondaryLabel)
+                                bgViewColor: UIColor.systemBackground,
+                                helpTextColor: UIColor.systemGray,
+                                titleColor: UIColor.label,
+                                actionButtonBGColor: UIColor.systemBlue,
+                                actionButtonTextColor: UIColor.white,
+                                closeButtonBGColor: UIColor.systemGray,
+                                pageControlColor: UIColor.secondaryLabel)
         } else {
             ctColors = CTColors(mailtintColor: .default,
-                                    bgViewColor: UIColor.white,
-                                    helpTextColor: UIColor.systemGray,
-                                    titleColor: UIColor.black,
-                                    actionButtonBGColor: UIColor.systemBlue,
-                                    actionButtonTextColor: UIColor.white,
-                                    closeButtonBGColor: UIColor.systemGray,
-                                    pageControlColor: UIColor.darkGray)
+                                bgViewColor: UIColor.white,
+                                helpTextColor: UIColor.systemGray,
+                                titleColor: UIColor.black,
+                                actionButtonBGColor: UIColor.systemBlue,
+                                actionButtonTextColor: UIColor.white,
+                                closeButtonBGColor: UIColor.systemGray,
+                                pageControlColor: UIColor.darkGray)
         }
 
 // Now you can pass this set of colors when creating your instance of CTHelp

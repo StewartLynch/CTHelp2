@@ -1,6 +1,6 @@
 # CTHelp2
 
-[![Platform](http://img.shields.io/badge/platform-iOS-blue.svg?style=flat)](https://developer.apple.com/iphone/index.action)[![](http://img.shields.io/badge/language-Swift-brightgreen.svg?color=orange)](https://developer.apple.com/swift)![](https://img.shields.io/github/tag/stewartlynch/CTPicker?style=flat)![](https://img.shields.io/github/last-commit/StewartLynch/CTPicker)
+[![Platform](http://img.shields.io/badge/platform-iOS-blue.svg?style=flat)](https://developer.apple.com/iphone/index.action)[![](http://img.shields.io/badge/language-Swift-brightgreen.svg?color=orange)](https://developer.apple.com/swift)![](https://img.shields.io/github/tag/stewartlynch/CTHelp2?style=flat)![](https://img.shields.io/github/last-commit/StewartLynch/CTHelp2)
 
 ### What is this?
 
